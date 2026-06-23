@@ -13,58 +13,8 @@
 #define BTN_D   (1u << 4)
 
 
+
 #define FRAME_TICK_LIMIT 20000
-
-/*static void erase_game(Game *game)
-{
-    draw_rect(game->player.x, game->player.y,
-              game->player.width, game->player.height,
-              COLOR_BLACK);
-
-    draw_rect(game->cpu.x, game->cpu.y,
-              game->cpu.width, game->cpu.height,
-              COLOR_BLACK);
-
-    draw_rect(game->ball.x, game->ball.y,
-              game->ball.size, game->ball.size,
-              COLOR_BLACK);
-}*/
-
-//funcion para borrar ball
-
-/*static void erase_ball_area(int x, int y, int w, int h)
-{
-    for (int row = 0; row < h; row++) {
-        draw_hline(x, y + row, w, COLOR_BLACK);
-    }
-}*/
-
-
-
-/*static void erase_ball_trail(Game *game)
-{
-    int x0 = game->ball.prev_x;
-    int y0 = game->ball.prev_y;
-    int x1 = game->ball.x;
-    int y1 = game->ball.y;
-    int s  = game->ball.size;
-
-    if (x1 > x0) {
-        draw_rect(x0, y0, x1 - x0, s, COLOR_BLACK);
-    } else if (x1 < x0) {
-        draw_rect(x1 + s, y0, x0 - x1, s, COLOR_BLACK);
-    }
-
-    if (y1 > y0) {
-        draw_hline(x0, y0, s, COLOR_BLACK);
-        draw_hline(x0, y0 + 1, s, COLOR_BLACK);
-    } else if (y1 < y0) {
-        draw_hline(x0, y0 + s - 1, s, COLOR_BLACK);
-        draw_hline(x0, y0 + s - 2, s, COLOR_BLACK);
-    }
-}
-*/
-
 
 
 static int min_int(int a, int b)
@@ -96,7 +46,7 @@ static void erase_ball_union(Game *game)
     }
 }
 
-static void erase_game(Game *game)
+static void erase_incremental(Game *game)
 {
     // Player paddle: borrar solo la parte que dejó atrás
     if (game->player.y > game->player.prev_y) {
@@ -126,6 +76,20 @@ static void erase_game(Game *game)
 }
 
 
+static void erase_full_game(Game *game)
+{
+    draw_rect(game->player.x, game->player.y,
+              game->player.width, game->player.height,
+              COLOR_BLACK);
+
+    draw_rect(game->cpu.x, game->cpu.y,
+              game->cpu.width, game->cpu.height,
+              COLOR_BLACK);
+
+    draw_rect(game->ball.x - 2, game->ball.y - 2,
+              game->ball.size + 4, game->ball.size + 4,
+              COLOR_BLACK);
+}
 
 
 static void draw_game(Game *game)
@@ -150,32 +114,64 @@ int main(void)
 
     game_init(&game);
     Xil_Out32(BTN_TRI, 0xFFFFFFFF);
+
+    int prev_pause_btn = 0;
+    int prev_reset_btn = 0; 
     clear_screen(COLOR_BLACK);
-   // draw_border(COLOR_WHITE);
+    draw_border(COLOR_WHITE);
     draw_game(&game);
 
-    while (1) {
-        frame_counter++;
+while (1) {
+    frame_counter++;
 
-        if (frame_counter >= FRAME_TICK_LIMIT) {
-            frame_counter = 0;
 
-           
+    
 
-            unsigned int btn = Xil_In32(BTN_DATA);
 
-            int player_up   = (btn & BTN_U) ? 1 : 0;
-            int player_down = (btn & BTN_D) ? 1 : 0;
+
+    if (frame_counter >= FRAME_TICK_LIMIT) {
+        frame_counter = 0;
+
+        unsigned int btn = Xil_In32(BTN_DATA);
+
+        int player_up   = (btn & BTN_U) ? 1 : 0;
+        int player_down = (btn & BTN_D) ? 1 : 0;
+
+        int pause_btn = (btn & BTN_L) ? 1 : 0;
+        int reset_btn = (btn & BTN_C) ? 1 : 0;
+
+        if (reset_btn && !prev_reset_btn) {
+            erase_full_game(&game);
+            erase_incremental(&game);
+            erase_ball_union(&game);
+
+            game_reset(&game);
+
+            draw_game(&game);
+
+            prev_reset_btn = reset_btn;
+            continue;
+        }
+
+        prev_reset_btn = reset_btn;
+
+        if (pause_btn && !prev_pause_btn) {
+            game.paused = !game.paused;
+        }
+
+        prev_pause_btn = pause_btn;
+
+        if (!game.paused) {
+            erase_incremental(&game);
+            erase_ball_union(&game);
 
             game_update(&game, player_up, player_down);
 
-            erase_game(&game);
-
-            //erase_ball_trail(&game);
-            erase_ball_union(&game);
             draw_game(&game);
         }
     }
-
+}
     return 0;
 }
+
+

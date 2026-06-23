@@ -1,5 +1,6 @@
 #include "vga.h"
 #include <stdint.h>
+#include "xil_io.h"
 
 /* Caché en DDR (0x80000000) para evitar leer del hardware VGA
  * DDR tiene 128 MB disponible, usamos los primeros 153.6 KB para caché de pantalla
@@ -25,15 +26,17 @@ void write_word(int word_addr, unsigned int value) {
 }
 
 unsigned int read_word(int word_addr) {
-    if (word_addr < TOTAL_WORDS) {
+    if (word_addr >= 0 && word_addr < TOTAL_WORDS) {
         return (unsigned int)vga_cache[word_addr];
     }
     return 0;
 }
+   
 
 // ─── draw_pixel ───────────────────────────────────────────────────────────────
 // modifica un solo nibble dentro del word sin tocar los otros 7 pixeles
 
+/*
 void draw_pixel(int x, int y, unsigned char color) {
     if (x < 0 || x >= SCREEN_W || y < 0 || y >= SCREEN_H) return;
 
@@ -50,7 +53,28 @@ unsigned int color_to_word(unsigned char color) {
     unsigned int c = color & 0xF;
     return c | (c << 4) | (c << 8) | (c << 12) | 
            (c << 16) | (c << 20) | (c << 24) | (c << 28);
+}*/
+
+
+
+void draw_pixel(int x, int y, unsigned char color) {
+    if (x < 0 || x >= SCREEN_W || y < 0 || y >= SCREEN_H) return;
+
+    int word_addr  = (y * WORDS_PER_LINE) + (x / 8);
+    int nibble_pos = 7 - (x % 8);
+    int shift      = nibble_pos * 4;
+
+    unsigned int value = (color & 0xF) << shift;
+    write_word(word_addr, value);
 }
+
+unsigned int color_to_word(unsigned char color) {
+    unsigned int c = color & 0xF;
+
+    return c | (c << 4) | (c << 8) | (c << 12) |
+           (c << 16) | (c << 20) | (c << 24) | (c << 28);
+}
+
 
 void clear_screen(unsigned char color) {
     unsigned int pattern = color_to_word(color);

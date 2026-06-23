@@ -13,6 +13,40 @@ static void reset_ball(Game *game)
     game->ball.vy = BALL_SPEED_Y;
 }
 
+/*
+void game_reset(Game *game)
+{
+    game->player.y = (SCREEN_HEIGHT - PADDLE_HEIGHT) / 2;
+    game->cpu.y    = (SCREEN_HEIGHT - PADDLE_HEIGHT) / 2;
+
+    game->player_score = 0;
+    game->cpu_score = 0;
+
+    game->paused = 0;
+
+    reset_ball(game);
+}*/
+
+
+void game_reset(Game *game)
+{
+    game->player.y = (SCREEN_HEIGHT - PADDLE_HEIGHT) / 2;
+    game->player.prev_y = game->player.y;
+
+    game->cpu.y = (SCREEN_HEIGHT - PADDLE_HEIGHT) / 2;
+    game->cpu.prev_y = game->cpu.y;
+
+    game->player_score = 0;
+    game->cpu_score = 0;
+
+    game->paused = 0;
+
+    reset_ball(game);
+
+    game->ball.prev_x = game->ball.x;
+    game->ball.prev_y = game->ball.y;
+}
+
 void game_init(Game *game)
 {
     game->player.x = 20;
@@ -30,6 +64,8 @@ void game_init(Game *game)
     game->player_score = 0;
     game->cpu_score = 0;
 
+    // esto es para pausar el juego
+    game->paused = 0;     
     reset_ball(game);
 }
 

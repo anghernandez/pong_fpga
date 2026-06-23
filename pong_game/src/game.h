@@ -22,17 +22,22 @@ typedef struct {
 } Ball;
 
 
+
 typedef struct {
     Paddle player;
     Paddle cpu;
     Ball ball;
     int player_score;
     int cpu_score;
+    int paused;
 } Game;
+
+
+
 
 void game_init(Game *game);
 void game_update(Game *game, int player_up, int player_down);
-
+void game_reset(Game *game);
 
 
 
