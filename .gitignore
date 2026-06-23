@@ -1,0 +1,40 @@
+# Build outputs
+build/
+Debug/
+Release/
+
+# Vitis
+.metadata/
+.ide/
+.vitisWorkspace.json
+
+# Exportados BSP/Platform
+export/
+
+# Logs
+logs/
+*.log
+
+# Objetos y binarios
+*.o
+*.obj
+*.d
+*.elf
+*.map
+*.bin
+*.pdi
+
+# Vivado
+.cache/
+.hw/
+.ip_user_files/
+.runs/
+.sim/
+
+# Configuración temporal
+*.lock
+.peers.ini
+.repo.yaml
+
+# Linux
+*~
