@@ -41,7 +41,7 @@ static int get_speed_from_switches(void)
 
     return 1;
 }
-
+/*
 static void erase_ball_union(Game *game)
 {
     int margin = 2;
@@ -59,7 +59,35 @@ static void erase_ball_union(Game *game)
     for (int y = top; y < bottom; y++) {
         draw_hline(left, y, right - left, COLOR_BLACK);
     }
+}*/
+
+
+static void erase_ball_union(Game *game)
+{
+    int margin = 3;
+
+    int x0 = game->ball.prev_x - margin;
+    int y0 = game->ball.prev_y - margin;
+    int x1 = game->ball.x - margin;
+    int y1 = game->ball.y - margin;
+
+    int left   = min_int(x0, x1);
+    int top    = min_int(y0, y1);
+    int right  = max_int(x0, x1) + game->ball.size + margin * 2;
+    int bottom = max_int(y0, y1) + game->ball.size + margin * 2;
+
+    if (left < 0) left = 0;
+    if (top < 0) top = 0;
+    if (right > SCREEN_W) right = SCREEN_W;
+    if (bottom > SCREEN_H) bottom = SCREEN_H;
+
+    for (int y = top; y < bottom; y++) {
+        draw_hline(left, y, right - left, COLOR_BLACK);
+    }
 }
+
+
+
 
 static void erase_incremental(Game *game)
 {

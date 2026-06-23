@@ -177,18 +177,19 @@ static void update_ball(Game *game)
         }
 
         // Punto para CPU
-        if (game->ball.x + game->ball.size < 0) {
+        if (game->ball.x <= 0) { 
             game->cpu_score++;
             reset_ball(game);
             break;
         }
 
         // Punto para jugador
-        if (game->ball.x > SCREEN_WIDTH) {
-            game->player_score++;
-            reset_ball(game);
-            break;
-        }
+        if (game->ball.x >= SCREEN_WIDTH) {
+        game->player_score++;
+        reset_ball(game);
+        break;
+}
+        
     }
 }
 
