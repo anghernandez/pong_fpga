@@ -2,9 +2,12 @@
 #include "vga.h"
 #include "xil_io.h"
 
+#define SW_DATA 0x40020000
+#define SW_TRI 0x40020004
+
+
 #define BTN_DATA 0x40010000
 #define BTN_TRI  0x40010004
-
 
 #define BTN_C   (1u << 0)
 #define BTN_U   (1u << 1)
@@ -25,6 +28,18 @@ static int min_int(int a, int b)
 static int max_int(int a, int b)
 {
     return (a > b) ? a : b;
+}
+
+
+static int get_speed_from_switches(void)
+{
+    unsigned int sw = Xil_In32(SW_DATA);
+
+    if (sw & (1 << 4)) return 3; // rápida
+    if (sw & (1 << 3)) return 2; // media
+    if (sw & (1 << 2)) return 1; // lenta
+
+    return 1;
 }
 
 static void erase_ball_union(Game *game)
@@ -114,11 +129,12 @@ int main(void)
 
     game_init(&game);
     Xil_Out32(BTN_TRI, 0xFFFFFFFF);
+    Xil_Out32(SW_TRI,  0xFFFFFFFF);
 
     int prev_pause_btn = 0;
     int prev_reset_btn = 0; 
     clear_screen(COLOR_BLACK);
-    draw_border(COLOR_WHITE);
+   // draw_border(COLOR_WHITE);
     draw_game(&game);
 
 while (1) {
@@ -161,13 +177,16 @@ while (1) {
 
         prev_pause_btn = pause_btn;
 
-        if (!game.paused) {
-            erase_incremental(&game);
-            erase_ball_union(&game);
+      if (!game.paused) {
+        game.speed = get_speed_from_switches();
 
-            game_update(&game, player_up, player_down);
+        game_update(&game, player_up, player_down);
 
-            draw_game(&game);
+        erase_incremental(&game);
+        erase_ball_union(&game);
+
+        draw_game(&game);
+
         }
     }
 }

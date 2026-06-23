@@ -3,10 +3,11 @@
 
 static void reset_ball(Game *game)
 {
-    game->ball.x = SCREEN_WIDTH / 2;
-    game->ball.y = SCREEN_HEIGHT / 2;
     game->ball.prev_x = game->ball.x;
     game->ball.prev_y = game->ball.y;
+
+    game->ball.x = SCREEN_WIDTH / 2;
+    game->ball.y = SCREEN_HEIGHT / 2;
 
     game->ball.size = BALL_SIZE;
     game->ball.vx = BALL_SPEED_X;
@@ -40,11 +41,11 @@ void game_reset(Game *game)
     game->cpu_score = 0;
 
     game->paused = 0;
+    game->speed = 1; // esto es para velocidad 
 
     reset_ball(game);
 
-    game->ball.prev_x = game->ball.x;
-    game->ball.prev_y = game->ball.y;
+
 }
 
 void game_init(Game *game)
@@ -65,7 +66,8 @@ void game_init(Game *game)
     game->cpu_score = 0;
 
     // esto es para pausar el juego
-    game->paused = 0;     
+    game->paused = 0;  
+    game->speed = 1;   
     reset_ball(game);
 }
 
@@ -117,65 +119,76 @@ static int rect_collision(int ax, int ay, int aw, int ah,
            ay + ah > by;
 }
 
+
+
 static void update_ball(Game *game)
 {
-    game->ball.x += game->ball.vx;
-    game->ball.y += game->ball.vy;
+    int steps = game->speed;
 
-    // Rebote con borde superior
-    if (game->ball.y <= 1) {
-        game->ball.y = 1;
+    if (steps < 1) steps = 1;
+    if (steps > 3) steps = 3;
 
-        if (game->ball.vy < 0) {
-            game->ball.vy = -game->ball.vy;
+    for (int i = 0; i < steps; i++) {
+        game->ball.x += game->ball.vx;
+        game->ball.y += game->ball.vy;
+
+        // Rebote con borde superior
+        if (game->ball.y <= 1) {
+            game->ball.y = 1;
+
+            if (game->ball.vy < 0) {
+                game->ball.vy = -game->ball.vy;
+            }
         }
-    }
 
-    // Rebote con borde inferior
-    if (game->ball.y + game->ball.size >= SCREEN_HEIGHT - 1) {
-        game->ball.y = SCREEN_HEIGHT - game->ball.size - 1;
+        // Rebote con borde inferior
+        if (game->ball.y + game->ball.size >= SCREEN_HEIGHT - 1) {
+            game->ball.y = SCREEN_HEIGHT - game->ball.size - 1;
 
-        if (game->ball.vy > 0) {
-            game->ball.vy = -game->ball.vy;
+            if (game->ball.vy > 0) {
+                game->ball.vy = -game->ball.vy;
+            }
         }
-    }
 
-    // Colisión con paddle del jugador
-    if (rect_collision(game->ball.x, game->ball.y,
-                       game->ball.size, game->ball.size,
-                       game->player.x, game->player.y,
-                       game->player.width, game->player.height)) {
+        // Colisión con paddle del jugador
+        if (rect_collision(game->ball.x, game->ball.y,
+                           game->ball.size, game->ball.size,
+                           game->player.x, game->player.y,
+                           game->player.width, game->player.height)) {
 
-        game->ball.x = game->player.x + game->player.width + 1;
+            game->ball.x = game->player.x + game->player.width + 1;
 
-        if (game->ball.vx < 0) {
-            game->ball.vx = -game->ball.vx;
+            if (game->ball.vx < 0) {
+                game->ball.vx = -game->ball.vx;
+            }
         }
-    }
 
-    // Colisión con paddle CPU
-    if (rect_collision(game->ball.x, game->ball.y,
-                       game->ball.size, game->ball.size,
-                       game->cpu.x, game->cpu.y,
-                       game->cpu.width, game->cpu.height)) {
+        // Colisión con paddle CPU
+        if (rect_collision(game->ball.x, game->ball.y,
+                           game->ball.size, game->ball.size,
+                           game->cpu.x, game->cpu.y,
+                           game->cpu.width, game->cpu.height)) {
 
-        game->ball.x = game->cpu.x - game->ball.size - 1;
+            game->ball.x = game->cpu.x - game->ball.size - 1;
 
-        if (game->ball.vx > 0) {
-            game->ball.vx = -game->ball.vx;
+            if (game->ball.vx > 0) {
+                game->ball.vx = -game->ball.vx;
+            }
         }
-    }
 
-    // Punto para CPU
-    if (game->ball.x + game->ball.size < 0) {
-        game->cpu_score++;
-        reset_ball(game);
-    }
+        // Punto para CPU
+        if (game->ball.x + game->ball.size < 0) {
+            game->cpu_score++;
+            reset_ball(game);
+            break;
+        }
 
-    // Punto para jugador
-    if (game->ball.x > SCREEN_WIDTH) {
-        game->player_score++;
-        reset_ball(game);
+        // Punto para jugador
+        if (game->ball.x > SCREEN_WIDTH) {
+            game->player_score++;
+            reset_ball(game);
+            break;
+        }
     }
 }
 

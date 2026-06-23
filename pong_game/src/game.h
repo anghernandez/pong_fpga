@@ -30,6 +30,7 @@ typedef struct {
     int player_score;
     int cpu_score;
     int paused;
+    int speed;
 } Game;
 
 
