@@ -38,3 +38,27 @@ logs/
 
 # Linux
 *~
+
+
+# Checkpoints
+CHECKPOINT2/
+CHECKPOINT2.zip
+
+# Vivado/Vitis Platform
+proyecto_2/
+
+# IDE files
+pong_game/_ide/
+
+# Generated files
+pong_game/compile_commands.json
+pong_game/src/compile_commands.json
+pong_game/src/.clangd
+
+
+pong_game/.gitignore
+pong_game/vitis-comp.json
+pong_game/src/Empty_applicationExample.cmake
+pong_game/src/README.txt
+pong_game/src/UserConfig.cmake
+pong_game/src/src/
