@@ -1,0 +1,3 @@
+domain_path: /home/usuario/Documents/pong_fpga/proyecto_2/export/proyecto_2/sw/standalone_microblaze_riscv_0
+app_src_dir: /home/usuario/Xilinx/Vitis/2024.1/data/embeddedsw/lib/sw_apps/empty_application
+template: empty_application
