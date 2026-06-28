@@ -92,8 +92,7 @@ Reporte generado desde el diseño implementado (`impl_1`).
 
 ### Prerrequisitos
 
-- Vivado 2024.1
-- Vitis 2024.1
+- Vitis 2024.1 (camino rápido) — o Vivado 2024.1 + Vitis 2024.1 (camino completo)
 - Nexys A7-100T con cable USB-JTAG
 - MicroSD con archivos `MENU.BIN` y `FIELD.BIN` (imágenes del menú)
 
@@ -104,7 +103,36 @@ git clone https://github.com/anghernandez/pong_fpga.git
 cd pong_fpga
 ```
 
-### Paso 2 — Recrear el proyecto Vivado
+---
+
+### Camino rápido — solo Vitis (recomendado)
+
+El repositorio incluye el archivo `Hardware/xsaCHECK3.xsa` con el hardware ya compilado
+y el bitstream embebido. No es necesario abrir Vivado.
+
+**Paso 2 — Crear la plataforma en Vitis**
+
+1. Abrir Vitis 2024.1 y crear un workspace nuevo
+2. `File > New > Platform Project` → seleccionar `Hardware/xsaCHECK3.xsa`
+3. Compilar la plataforma
+
+**Paso 3 — Crear el application component**
+
+1. `File > New > Application Project` → seleccionar la plataforma creada
+2. Copiar todos los archivos de `Firmware/src/` al componente de la aplicación
+
+**Paso 4 — Compilar y programar**
+
+1. Click derecho en el application component → **Build**
+2. Click en **Run** — Vitis programa el bitstream, descarga el ELF al MicroBlaze y ejecuta automáticamente
+
+---
+
+### Camino completo — reconstruir desde Vivado
+
+Usar este camino solo si se necesita modificar el hardware (block design, IPs, constraints).
+
+**Paso 2 — Recrear el proyecto Vivado**
 
 Desde la Tcl Console de Vivado:
 
@@ -119,26 +147,12 @@ Al abrir el proyecto por primera vez Vivado puede pedir actualizar los IPs — a
 > **Nota:** el IP de VGA (`top_vga`) está incluido en `HDL/top_vga/` y el TCL
 > lo registra automáticamente como IP repository al correr el script.
 
-### Paso 3 — Generar el bitstream
+**Paso 3 — Generar el bitstream y exportar hardware**
 
-En Vivado: `Flow > Generate Bitstream` y esperar a que complete.
+1. En Vivado: `Flow > Generate Bitstream`
+2. Al terminar: `File > Export > Export Hardware` → activar **Include Bitstream** → guardar como `.xsa`
 
-Alternativamente, usar el bitstream precompilado disponible en el repositorio.
-
-### Paso 4 — Configurar la plataforma en Vitis
-
-1. Abrir Vitis 2024.1 y crear un workspace nuevo
-2. `File > New > Platform Project` → seleccionar el `.xsa` exportado desde Vivado
-3. `File > New > Application Project` → seleccionar la plataforma creada
-4. Copiar todos los archivos de `Firmware/src/` al componente de la aplicación
-5. Compilar el proyecto
-
-### Paso 5 — Compilar y programar la FPGA
-
-Desde Vitis:
-
-1. Click derecho en el application component → **Build** para compilar el firmware y generar el ELF
-2. Click en **Run** — Vitis programa el bitstream, descarga el ELF al MicroBlaze y ejecuta automáticamente
+**Paso 4 — Continuar desde el Paso 2 del camino rápido** usando el `.xsa` recién exportado.
 
 ---
 
