@@ -1,0 +1,1429 @@
+
+<style>
+.hljs {
+  color: #383a42;
+  background: #fafafa;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #a0a1a7;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #a626a4;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e45649;
+}
+
+.hljs-literal {
+  color: #0184bb;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #50a14f;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #986801;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #4078f2;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #c18401;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+.markdown-body .octicon {
+  display: inline-block;
+  fill: currentColor;
+  vertical-align: text-bottom;
+}
+
+#descriptions{
+  margin-left:5.5%;
+  margin-right:3%;
+}
+
+.markdown-body .anchor {
+  float: left;
+  line-height: 1;
+  margin-left: -20px;
+  padding-right: 4px;
+}
+
+.markdown-body .anchor:focus {
+  outline: none;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+  color: #1b1f23;
+  vertical-align: middle;
+  visibility: hidden;
+}
+
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+  text-decoration: none;
+}
+
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+
+.markdown-body h1:hover .anchor .octicon-link:before,
+.markdown-body h2:hover .anchor .octicon-link:before,
+.markdown-body h3:hover .anchor .octicon-link:before,
+.markdown-body h4:hover .anchor .octicon-link:before,
+.markdown-body h5:hover .anchor .octicon-link:before,
+.markdown-body h6:hover .anchor .octicon-link:before {
+  width: 16px;
+  height: 16px;
+  content: ' ';
+  display: inline-block;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' width='16' height='16' aria-hidden='true'%3E%3Cpath fill-rule='evenodd' d='M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z'%3E%3C/path%3E%3C/svg%3E");
+}.markdown-body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
+  color: #24292e;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji;
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.markdown-body details {
+  display: block;
+}
+
+.markdown-body summary {
+  display: list-item;
+}
+
+.markdown-body a {
+  background-color: initial;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline-width: 0;
+}
+
+.markdown-body strong {
+  font-weight: inherit;
+  font-weight: bolder;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: .67em 0;
+}
+
+.markdown-body img {
+  border-style: none;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre {
+  font-family: monospace,monospace;
+  font-size: 1em;
+}
+
+.markdown-body hr {
+  box-sizing: initial;
+  height: 0;
+  overflow: visible;
+}
+
+.markdown-body input {
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body input {
+  overflow: visible;
+}
+
+.markdown-body [type=checkbox] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body * {
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.markdown-body a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+.markdown-body strong {
+  font-weight: 600;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #dfe2e5;
+}
+
+.markdown-body hr:after,
+.markdown-body hr:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body hr:after {
+  clear: both;
+}
+
+.markdown-body table {
+  width:100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body th {
+    background-color: #ffd78c;
+}
+
+.markdown-body details summary {
+  cursor: pointer;
+}
+
+.markdown-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #d1d5da;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body h1 {
+  font-size: 32px;
+}
+
+.markdown-body h1,
+.markdown-body h2 {
+  font-weight: 600;
+}
+
+.markdown-body h2 {
+  font-size: 24px;
+}
+
+.markdown-body h3 {
+  font-size: 20px;
+}
+
+.markdown-body h3,
+.markdown-body h4 {
+  font-weight: 600;
+}
+
+.markdown-body h4 {
+  font-size: 16px;
+}
+
+.markdown-body h5 {
+  font-size: 14px;
+}
+
+.markdown-body h5,
+.markdown-body h6 {
+  font-weight: 600;
+}
+
+.markdown-body h6 {
+  font-size: 12px;
+}
+
+.markdown-body p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ol,
+.markdown-body ul {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ol ol ol,
+.markdown-body ol ul ol,
+.markdown-body ul ol ol,
+.markdown-body ul ul ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code,
+.markdown-body pre {
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  font-size: 12px;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body input::-webkit-inner-spin-button,
+.markdown-body input::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.markdown-body :checked+.radio-label {
+  position: relative;
+  z-index: 1;
+  border-color: #0366d6;
+}
+
+.markdown-body .border {
+  border: 1px solid #e1e4e8!important;
+}
+
+.markdown-body .border-0 {
+  border: 0!important;
+}
+
+.markdown-body .border-bottom {
+  border-bottom: 1px solid #e1e4e8!important;
+}
+
+.markdown-body .rounded-1 {
+  border-radius: 3px!important;
+}
+
+.markdown-body .bg-white {
+  background-color: #fff!important;
+}
+
+.markdown-body .bg-gray-light {
+  background-color: #fafbfc!important;
+}
+
+.markdown-body .text-gray-light {
+  color: #6a737d!important;
+}
+
+.markdown-body .mb-0 {
+  margin-bottom: 0!important;
+}
+
+.markdown-body .my-2 {
+  margin-top: 8px!important;
+  margin-bottom: 8px!important;
+}
+
+.markdown-body .pl-0 {
+  padding-left: 0!important;
+}
+
+.markdown-body .py-0 {
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+}
+
+.markdown-body .pl-1 {
+  padding-left: 4px!important;
+}
+
+.markdown-body .pl-2 {
+  padding-left: 8px!important;
+}
+
+.markdown-body .py-2 {
+  padding-top: 8px!important;
+  padding-bottom: 8px!important;
+}
+
+.markdown-body .pl-3,
+.markdown-body .px-3 {
+  padding-left: 16px!important;
+}
+
+.markdown-body .px-3 {
+  padding-right: 16px!important;
+}
+
+.markdown-body .pl-4 {
+  padding-left: 24px!important;
+}
+
+.markdown-body .pl-5 {
+  padding-left: 32px!important;
+}
+
+.markdown-body .pl-6 {
+  padding-left: 40px!important;
+}
+
+.markdown-body .f6 {
+  font-size: 12px!important;
+}
+
+.markdown-body .lh-condensed {
+  line-height: 1.25!important;
+}
+
+.markdown-body .text-bold {
+  font-weight: 600!important;
+}
+
+.markdown-body .pl-c {
+  color: #6a737d;
+}
+
+.markdown-body .pl-c1,
+.markdown-body .pl-s .pl-v {
+  color: #005cc5;
+}
+
+.markdown-body .pl-e,
+.markdown-body .pl-en {
+  color: #6f42c1;
+}
+
+.markdown-body .pl-s .pl-s1,
+.markdown-body .pl-smi {
+  color: #24292e;
+}
+
+.markdown-body .pl-ent {
+  color: #22863a;
+}
+
+.markdown-body .pl-k {
+  color: #d73a49;
+}
+
+.markdown-body .pl-pds,
+.markdown-body .pl-s,
+.markdown-body .pl-s .pl-pse .pl-s1,
+.markdown-body .pl-sr,
+.markdown-body .pl-sr .pl-cce,
+.markdown-body .pl-sr .pl-sra,
+.markdown-body .pl-sr .pl-sre {
+  color: #032f62;
+}
+
+.markdown-body .pl-smw,
+.markdown-body .pl-v {
+  color: #e36209;
+}
+
+.markdown-body .pl-bu {
+  color: #b31d28;
+}
+
+.markdown-body .pl-ii {
+  color: #fafbfc;
+  background-color: #b31d28;
+}
+
+.markdown-body .pl-c2 {
+  color: #fafbfc;
+  background-color: #d73a49;
+}
+
+.markdown-body .pl-c2:before {
+  content: "^M";
+}
+
+.markdown-body .pl-sr .pl-cce {
+  font-weight: 700;
+  color: #22863a;
+}
+
+.markdown-body .pl-ml {
+  color: #735c0f;
+}
+
+.markdown-body .pl-mh,
+.markdown-body .pl-mh .pl-en,
+.markdown-body .pl-ms {
+  font-weight: 700;
+  color: #005cc5;
+}
+
+.markdown-body .pl-mi {
+  font-style: italic;
+  color: #24292e;
+}
+
+.markdown-body .pl-mb {
+  font-weight: 700;
+  color: #24292e;
+}
+
+.markdown-body .pl-md {
+  color: #b31d28;
+  background-color: #ffeef0;
+}
+
+.markdown-body .pl-mi1 {
+  color: #22863a;
+  background-color: #f0fff4;
+}
+
+.markdown-body .pl-mc {
+  color: #e36209;
+  background-color: #ffebda;
+}
+
+.markdown-body .pl-mi2 {
+  color: #f6f8fa;
+  background-color: #005cc5;
+}
+
+.markdown-body .pl-mdr {
+  font-weight: 700;
+  color: #6f42c1;
+}
+
+.markdown-body .pl-ba {
+  color: #586069;
+}
+
+.markdown-body .pl-sg {
+  color: #959da5;
+}
+
+.markdown-body .pl-corl {
+  text-decoration: underline;
+  color: #032f62;
+}
+
+.markdown-body .mb-0 {
+  margin-bottom: 0!important;
+}
+
+.markdown-body .my-2 {
+  margin-bottom: 8px!important;
+}
+
+.markdown-body .my-2 {
+  margin-top: 8px!important;
+}
+
+.markdown-body .pl-0 {
+  padding-left: 0!important;
+}
+
+.markdown-body .py-0 {
+  padding-top: 0!important;
+  padding-bottom: 0!important;
+}
+
+.markdown-body .pl-1 {
+  padding-left: 4px!important;
+}
+
+.markdown-body .pl-2 {
+  padding-left: 8px!important;
+}
+
+.markdown-body .py-2 {
+  padding-top: 8px!important;
+  padding-bottom: 8px!important;
+}
+
+.markdown-body .pl-3 {
+  padding-left: 16px!important;
+}
+
+.markdown-body .pl-4 {
+  padding-left: 24px!important;
+}
+
+.markdown-body .pl-5 {
+  padding-left: 32px!important;
+}
+
+.markdown-body .pl-6 {
+  padding-left: 40px!important;
+}
+
+.markdown-body .pl-7 {
+  padding-left: 48px!important;
+}
+
+.markdown-body .pl-8 {
+  padding-left: 64px!important;
+}
+
+.markdown-body .pl-9 {
+  padding-left: 80px!important;
+}
+
+.markdown-body .pl-10 {
+  padding-left: 96px!important;
+}
+
+.markdown-body .pl-11 {
+  padding-left: 112px!important;
+}
+
+.markdown-body .pl-12 {
+  padding-left: 128px!important;
+}
+
+.markdown-body hr {
+  border-bottom-color: #eee;
+}
+
+.markdown-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #d1d5da;
+}
+
+.markdown-body:after,
+.markdown-body:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body:after {
+  clear: both;
+}
+
+.markdown-body>:first-child {
+  margin-top: 0!important;
+}
+
+.markdown-body>:last-child {
+  margin-bottom: 0!important;
+}
+
+.markdown-body a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.markdown-body blockquote,
+.markdown-body details,
+.markdown-body dl,
+.markdown-body ol,
+.markdown-body p,
+.markdown-body pre,
+.markdown-body table,
+.markdown-body ul {
+  width:100%;
+
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: .25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #e1e4e8;
+  border: 0;
+}
+
+.markdown-body blockquote {
+  padding: 0 1em;
+  color: #6a737d;
+  border-left: .25em solid #dfe2e5;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+}
+
+.markdown-body h1,
+.markdown-body h2 {
+  padding-bottom: .3em;
+  border-bottom: 1px solid #eaecef;
+}
+
+.markdown-body h2 {
+  font-size: 1.5em;
+}
+
+.markdown-body h3 {
+  font-size: 1.25em;
+}
+
+.markdown-body h4 {
+  font-size: 1em;
+}
+
+.markdown-body h5 {
+  font-size: .875em;
+}
+
+.markdown-body h6 {
+  font-size: .85em;
+  color: #6a737d;
+}
+
+.markdown-body ol,
+.markdown-body ul {
+  padding-left: 2em;
+}
+
+.markdown-body ol ol,
+.markdown-body ol ul,
+.markdown-body ul ol,
+.markdown-body ul ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li {
+  word-wrap: break-all;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body li+li {
+  margin-top: .25em;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body table {
+  width: 100%;
+}
+
+.markdown-body table th {
+  font-weight: 600;
+}
+
+.markdown-body table td,
+.markdown-body table th {
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #c6cbd1;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  box-sizing: initial;
+  background-color: #fff;
+}
+
+.markdown-body img[align=right] {
+  padding-left: 20px;
+}
+
+.markdown-body img[align=left] {
+  padding-right: 20px;
+}
+
+.markdown-body code {
+  padding: .2em .4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(27,31,35,.05);
+  border-radius: 3px;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .highlight {
+  margin-bottom: 16px;
+}
+
+.markdown-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f6f8fa;
+  border-radius: 3px;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: initial;
+  border: 0;
+}
+
+.markdown-body .commit-tease-sha {
+  display: inline-block;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  font-size: 90%;
+  color: #444d56;
+}
+
+.markdown-body .full-commit .btn-outline:not(:disabled):hover {
+  color: #005cc5;
+  border-color: #005cc5;
+}
+
+.markdown-body .blob-wrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.markdown-body .blob-wrapper-embedded {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.markdown-body .blob-num {
+  width: 1%;
+  min-width: 50px;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  font-size: 12px;
+  line-height: 20px;
+  color: rgba(27,31,35,.3);
+  text-align: right;
+  white-space: nowrap;
+  vertical-align: top;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.markdown-body .blob-num:hover {
+  color: rgba(27,31,35,.6);
+}
+
+.markdown-body .blob-num:before {
+  content: attr(data-line-number);
+}
+
+.markdown-body .blob-code {
+  position: relative;
+  padding-right: 10px;
+  padding-left: 10px;
+  line-height: 20px;
+  vertical-align: top;
+}
+
+.markdown-body .blob-code-inner {
+  overflow: visible;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace;
+  font-size: 12px;
+  color: #24292e;
+  word-wrap: normal;
+  white-space: pre;
+}
+
+.markdown-body .pl-token.active,
+.markdown-body .pl-token:hover {
+  cursor: pointer;
+  background: #ffea7f;
+}
+
+.markdown-body .tab-size[data-tab-size="1"] {
+  -moz-tab-size: 1;
+  tab-size: 1;
+}
+
+.markdown-body .tab-size[data-tab-size="2"] {
+  -moz-tab-size: 2;
+  tab-size: 2;
+}
+
+.markdown-body .tab-size[data-tab-size="3"] {
+  -moz-tab-size: 3;
+  tab-size: 3;
+}
+
+.markdown-body .tab-size[data-tab-size="4"] {
+  -moz-tab-size: 4;
+  tab-size: 4;
+}
+
+.markdown-body .tab-size[data-tab-size="5"] {
+  -moz-tab-size: 5;
+  tab-size: 5;
+}
+
+.markdown-body .tab-size[data-tab-size="6"] {
+  -moz-tab-size: 6;
+  tab-size: 6;
+}
+
+.markdown-body .tab-size[data-tab-size="7"] {
+  -moz-tab-size: 7;
+  tab-size: 7;
+}
+
+.markdown-body .tab-size[data-tab-size="8"] {
+  -moz-tab-size: 8;
+  tab-size: 8;
+}
+
+.markdown-body .tab-size[data-tab-size="9"] {
+  -moz-tab-size: 9;
+  tab-size: 9;
+}
+
+.markdown-body .tab-size[data-tab-size="10"] {
+  -moz-tab-size: 10;
+  tab-size: 10;
+}
+
+.markdown-body .tab-size[data-tab-size="11"] {
+  -moz-tab-size: 11;
+  tab-size: 11;
+}
+
+.markdown-body .tab-size[data-tab-size="12"] {
+  -moz-tab-size: 12;
+  tab-size: 12;
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 .2em .25em -1.6em;
+  vertical-align: middle;
+}
+.markdown-body .description {
+  margin: 0 .2em .25em -1.6em;
+  vertical-align: middle;
+}
+
+</style>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <title>TerosHDL</title>
+  <style>
+    body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+  </style>
+  </head>
+  <body>
+  <article class="markdown-body">
+
+<div id="teroshdl" class='templateTerosHDL'>
+<h1 id="entity-pixel_mux">Entity: pixel_mux</h1><ul>
+<li><strong>File</strong>: pixel_mux.v</li>
+</ul><ul>
+<li><strong>Title:</strong>  pixel_mux</li>
+<li><strong>Author:</strong>  Jesús Huertas</li>
+<li><strong>Date:</strong>  23/05/2026</li>
+</ul><h2 id="diagram">Diagram</h2><svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" viewBox="0 0 505 90"><svg id="SvgjsSvg1002" width="2" height="0" focusable="false" style="overflow:hidden;top:-100%;left:-100%;position:absolute;opacity:0"><polyline id="SvgjsPolyline1003" points="145,0 160,0"></polyline><path id="SvgjsPath1004" d="M0 0 "></path></svg><rect id="SvgjsRect1006" width="250" height="70" fill="black" x="160" y="15"></rect><rect id="SvgjsRect1007" width="246" height="65" fill="#fdfd96" x="162" y="17"></rect><text id="SvgjsText1008" font-family="Helvetica" x="140" y="9.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1009" dy="26" x="140" svgjs:data="{&quot;newLined&quot;:true}">   wire </tspan></text><text id="SvgjsText1010" font-family="Helvetica" x="175" y="9.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1011" dy="26" x="175" svgjs:data="{&quot;newLined&quot;:true}">   clk </tspan></text><line id="SvgjsLine1012" x1="145" y1="30" x2="160" y2="30" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1013" font-family="Helvetica" x="140" y="29.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1014" dy="26" x="140" svgjs:data="{&quot;newLined&quot;:true}">   wire [3:0] </tspan></text><text id="SvgjsText1015" font-family="Helvetica" x="175" y="29.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1016" dy="26" x="175" svgjs:data="{&quot;newLined&quot;:true}">   pixel_nibble </tspan></text><line id="SvgjsLine1017" x1="145" y1="50" x2="160" y2="50" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1018" font-family="Helvetica" x="140" y="49.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1019" dy="26" x="140" svgjs:data="{&quot;newLined&quot;:true}">   wire </tspan></text><text id="SvgjsText1020" font-family="Helvetica" x="175" y="49.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1021" dy="26" x="175" svgjs:data="{&quot;newLined&quot;:true}">   video_on </tspan></text><line id="SvgjsLine1022" x1="145" y1="70" x2="160" y2="70" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1023" font-family="Helvetica" x="430" y="9.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1024" dy="26" x="430" svgjs:data="{&quot;newLined&quot;:true}">   [3:0] </tspan></text><text id="SvgjsText1025" font-family="Helvetica" x="395" y="9.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1026" dy="26" x="395" svgjs:data="{&quot;newLined&quot;:true}">   vga_r </tspan></text><line id="SvgjsLine1027" x1="410" y1="30" x2="425" y2="30" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1028" font-family="Helvetica" x="430" y="29.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1029" dy="26" x="430" svgjs:data="{&quot;newLined&quot;:true}">   [3:0] </tspan></text><text id="SvgjsText1030" font-family="Helvetica" x="395" y="29.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1031" dy="26" x="395" svgjs:data="{&quot;newLined&quot;:true}">   vga_g </tspan></text><line id="SvgjsLine1032" x1="410" y1="50" x2="425" y2="50" stroke-linecap="rec" stroke="black" stroke-width="5"></line><text id="SvgjsText1033" font-family="Helvetica" x="430" y="49.3015625" font-size="20" text-anchor="start" family="Helvetica" size="20" anchor="start" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1034" dy="26" x="430" svgjs:data="{&quot;newLined&quot;:true}">   [3:0] </tspan></text><text id="SvgjsText1035" font-family="Helvetica" x="395" y="49.3015625" font-size="20" text-anchor="end" family="Helvetica" size="20" anchor="end" svgjs:data="{&quot;leading&quot;:&quot;1.3&quot;}"><tspan id="SvgjsTspan1036" dy="26" x="395" svgjs:data="{&quot;newLined&quot;:true}">   vga_b </tspan></text><line id="SvgjsLine1037" x1="410" y1="70" x2="425" y2="70" stroke-linecap="rec" stroke="black" stroke-width="5"></line></svg>
+<h2 id="description">Description</h2><p>Multiplexor de píxel para el controlador VGA. Recibe un nibble de  4 bits leído desde la VRAM y lo convierte en salida RGB de 12 bits  compatible con el conector VGA de la Nexys A7.</p> <p>Los 4 bits se interpretan como índice de paleta fija de 16 colores.  Cada canal RGB replica los 4 bits en su salida de 4 bits, produciendo  una paleta estándar de 16 colores RGBI. El índice 0 siempre produce  negro independientemente de video_on.</p> <p>La salida RGB se registra en flip-flops para mejorar el timing  y reducir glitching. Esto introduce una latencia adicional de  un ciclo que vga_controller compensa adelantando la dirección  de lectura de la VRAM en dos ciclos.</p><h2 id="ports">Ports</h2>
+<table>
+<thead>
+<tr>
+<th id="port_name">Port name</th>
+<th id="direction">Direction</th>
+<th id="type">Type</th>
+<th id="description">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>clk</td>
+<td>input</td>
+<td>wire</td>
+<td>Reloj de 25 MHz dominio VGA</td>
+</tr>
+<tr>
+<td>pixel_nibble</td>
+<td>input</td>
+<td>wire [3:0]</td>
+<td>Nibble leído de la VRAM: índice de paleta 0-15</td>
+</tr>
+<tr>
+<td>video_on</td>
+<td>input</td>
+<td>wire</td>
+<td>Activo cuando el píxel está en la zona visible</td>
+</tr>
+<tr>
+<td>vga_r</td>
+<td>output</td>
+<td>[3:0]</td>
+<td>Canal rojo, 4 bits, para conector VGA Nexys A7</td>
+</tr>
+<tr>
+<td>vga_g</td>
+<td>output</td>
+<td>[3:0]</td>
+<td>Canal verde, 4 bits, para conector VGA Nexys A7</td>
+</tr>
+<tr>
+<td>vga_b</td>
+<td>output</td>
+<td>[3:0]</td>
+<td>Canal azul, 4 bits, para conector VGA Nexys A7</td>
+</tr>
+</tbody>
+</table><h2 id="signals">Signals</h2>
+<table>
+<thead>
+<tr>
+<th id="name">Name</th>
+<th id="type">Type</th>
+<th id="description">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>r_out</td>
+<td>reg [3:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>g_out</td>
+<td>reg [3:0]</td>
+<td></td>
+</tr>
+<tr>
+<td>b_out</td>
+<td>reg [3:0]</td>
+<td></td>
+</tr>
+</tbody>
+</table><h2 id="processes">Processes</h2><ul>
+<li>unnamed: ( @(*) )</li>
+</ul><div id="descriptions"><p><strong>Type:</strong> always</p></div><ul>
+<li>unnamed: ( @(posedge clk) )</li>
+</ul><div id="descriptions"><p><strong>Type:</strong> always</p></div><h2 id="statemachines">State machines</h2><div><div id="state_machine"><?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.40.1 (20161225.0304)
+ -->
+<!-- Title: state transitions Pages: 1 -->
+<svg width="742pt" height="270pt"
+ viewBox="0.00 0.00 742.00 270.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 266)">
+<title>state transitions</title>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-266 738,-266 738,4 -4,4"/>
+<g id="clust1" class="cluster state regular">
+<title>cluster_r_out</title>
+<path fill="none" stroke="#000000" stroke-width="2" d="M20,-8C20,-8 714,-8 714,-8 720,-8 726,-14 726,-20 726,-20 726,-242 726,-242 726,-248 720,-254 714,-254 714,-254 20,-254 20,-254 14,-254 8,-248 8,-242 8,-242 8,-20 8,-20 8,-14 14,-8 20,-8"/>
+<text text-anchor="start" x="353.829" y="-235.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">r_out</text>
+</g>
+<!-- r_out -->
+<!-- 4&#39;h0 -->
+<g id="node2" class="node state regular">
+<title>4&#39;h0</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="618,-134 562,-134 562,-98 618,-98 618,-134"/>
+<text text-anchor="start" x="578.6684" y="-112.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;h0</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M574.3333,-99C574.3333,-99 605.6667,-99 605.6667,-99 611.3333,-99 617,-104.6667 617,-110.3333 617,-110.3333 617,-121.6667 617,-121.6667 617,-127.3333 611.3333,-133 605.6667,-133 605.6667,-133 574.3333,-133 574.3333,-133 568.6667,-133 563,-127.3333 563,-121.6667 563,-121.6667 563,-110.3333 563,-110.3333 563,-104.6667 568.6667,-99 574.3333,-99"/>
+</g>
+<!-- 4&#39;h0&#45;&gt;4&#39;h0 -->
+<g id="edge1" class="edge transition">
+<title>4&#39;h0&#45;&gt;4&#39;h0</title>
+<path fill="none" stroke="#000000" d="M618.0183,-120.8247C629.888,-121.1883 640,-119.5801 640,-116 640,-113.5387 635.2205,-112.0094 628.3762,-111.4121"/>
+<polygon fill="#000000" stroke="#000000" points="628.0957,-107.9049 618.0183,-111.1753 627.9356,-114.903 628.0957,-107.9049"/>
+<text text-anchor="middle" x="641.3895" y="-113" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;h1 -->
+<g id="node3" class="node state regular">
+<title>4&#39;h1</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="696,-216 640,-216 640,-180 696,-180 696,-216"/>
+<text text-anchor="start" x="656.6684" y="-194.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;h1</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M652.3333,-181C652.3333,-181 683.6667,-181 683.6667,-181 689.3333,-181 695,-186.6667 695,-192.3333 695,-192.3333 695,-203.6667 695,-203.6667 695,-209.3333 689.3333,-215 683.6667,-215 683.6667,-215 652.3333,-215 652.3333,-215 646.6667,-215 641,-209.3333 641,-203.6667 641,-203.6667 641,-192.3333 641,-192.3333 641,-186.6667 646.6667,-181 652.3333,-181"/>
+</g>
+<!-- 4&#39;h1&#45;&gt;4&#39;h0 -->
+<g id="edge2" class="edge transition">
+<title>4&#39;h1&#45;&gt;4&#39;h0</title>
+<path fill="none" stroke="#000000" d="M650.6893,-179.8015C639.985,-168.5483 626.0844,-153.9348 614.288,-141.5335"/>
+<polygon fill="#000000" stroke="#000000" points="616.6905,-138.9809 607.2623,-134.1476 611.6185,-143.8055 616.6905,-138.9809"/>
+<text text-anchor="middle" x="635.3895" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;h2 -->
+<g id="node4" class="node state regular">
+<title>4&#39;h2</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="618,-216 562,-216 562,-180 618,-180 618,-216"/>
+<text text-anchor="start" x="578.6684" y="-194.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;h2</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M574.3333,-181C574.3333,-181 605.6667,-181 605.6667,-181 611.3333,-181 617,-186.6667 617,-192.3333 617,-192.3333 617,-203.6667 617,-203.6667 617,-209.3333 611.3333,-215 605.6667,-215 605.6667,-215 574.3333,-215 574.3333,-215 568.6667,-215 563,-209.3333 563,-203.6667 563,-203.6667 563,-192.3333 563,-192.3333 563,-186.6667 568.6667,-181 574.3333,-181"/>
+</g>
+<!-- 4&#39;h2&#45;&gt;4&#39;h0 -->
+<g id="edge3" class="edge transition">
+<title>4&#39;h2&#45;&gt;4&#39;h0</title>
+<path fill="none" stroke="#000000" d="M590,-179.8015C590,-169.3976 590,-156.1215 590,-144.3768"/>
+<polygon fill="#000000" stroke="#000000" points="593.5001,-144.1476 590,-134.1476 586.5001,-144.1476 593.5001,-144.1476"/>
+<text text-anchor="middle" x="591.3895" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;h3 -->
+<g id="node5" class="node state regular">
+<title>4&#39;h3</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="540,-216 484,-216 484,-180 540,-180 540,-216"/>
+<text text-anchor="start" x="500.6684" y="-194.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;h3</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M496.3333,-181C496.3333,-181 527.6667,-181 527.6667,-181 533.3333,-181 539,-186.6667 539,-192.3333 539,-192.3333 539,-203.6667 539,-203.6667 539,-209.3333 533.3333,-215 527.6667,-215 527.6667,-215 496.3333,-215 496.3333,-215 490.6667,-215 485,-209.3333 485,-203.6667 485,-203.6667 485,-192.3333 485,-192.3333 485,-186.6667 490.6667,-181 496.3333,-181"/>
+</g>
+<!-- 4&#39;h3&#45;&gt;4&#39;h0 -->
+<g id="edge4" class="edge transition">
+<title>4&#39;h3&#45;&gt;4&#39;h0</title>
+<path fill="none" stroke="#000000" d="M529.3107,-179.8015C540.015,-168.5483 553.9156,-153.9348 565.712,-141.5335"/>
+<polygon fill="#000000" stroke="#000000" points="568.3815,-143.8055 572.7377,-134.1476 563.3095,-138.9809 568.3815,-143.8055"/>
+<text text-anchor="middle" x="557.3895" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;h4 -->
+<g id="node6" class="node state regular">
+<title>4&#39;h4</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="462,-216 406,-216 406,-180 462,-180 462,-216"/>
+<text text-anchor="start" x="422.6684" y="-194.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;h4</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M418.3333,-181C418.3333,-181 449.6667,-181 449.6667,-181 455.3333,-181 461,-186.6667 461,-192.3333 461,-192.3333 461,-203.6667 461,-203.6667 461,-209.3333 455.3333,-215 449.6667,-215 449.6667,-215 418.3333,-215 418.3333,-215 412.6667,-215 407,-209.3333 407,-203.6667 407,-203.6667 407,-192.3333 407,-192.3333 407,-186.6667 412.6667,-181 418.3333,-181"/>
+</g>
+<!-- 4&#39;hA -->
+<g id="node12" class="node state regular">
+<title>4&#39;hA</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="426,-134 370,-134 370,-98 426,-98 426,-134"/>
+<text text-anchor="start" x="386.0024" y="-112.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;hA</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M382.3333,-99C382.3333,-99 413.6667,-99 413.6667,-99 419.3333,-99 425,-104.6667 425,-110.3333 425,-110.3333 425,-121.6667 425,-121.6667 425,-127.3333 419.3333,-133 413.6667,-133 413.6667,-133 382.3333,-133 382.3333,-133 376.6667,-133 371,-127.3333 371,-121.6667 371,-121.6667 371,-110.3333 371,-110.3333 371,-104.6667 376.6667,-99 382.3333,-99"/>
+</g>
+<!-- 4&#39;h4&#45;&gt;4&#39;hA -->
+<g id="edge5" class="edge transition">
+<title>4&#39;h4&#45;&gt;4&#39;hA</title>
+<path fill="none" stroke="#000000" d="M426.0104,-179.8015C421.3496,-169.1853 415.3759,-155.5784 410.1433,-143.6596"/>
+<polygon fill="#000000" stroke="#000000" points="413.1919,-141.897 405.9672,-134.1476 406.7824,-144.711 413.1919,-141.897"/>
+<text text-anchor="middle" x="419.3895" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;h5 -->
+<g id="node7" class="node state regular">
+<title>4&#39;h5</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="332,-52 276,-52 276,-16 332,-16 332,-52"/>
+<text text-anchor="start" x="292.6684" y="-30.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;h5</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M288.3333,-17C288.3333,-17 319.6667,-17 319.6667,-17 325.3333,-17 331,-22.6667 331,-28.3333 331,-28.3333 331,-39.6667 331,-39.6667 331,-45.3333 325.3333,-51 319.6667,-51 319.6667,-51 288.3333,-51 288.3333,-51 282.6667,-51 277,-45.3333 277,-39.6667 277,-39.6667 277,-28.3333 277,-28.3333 277,-22.6667 282.6667,-17 288.3333,-17"/>
+</g>
+<!-- 4&#39;h5&#45;&gt;4&#39;hA -->
+<g id="edge6" class="edge transition">
+<title>4&#39;h5&#45;&gt;4&#39;hA</title>
+<path fill="none" stroke="#000000" d="M332.2128,-44.7537C340.702,-48.773 349.6942,-53.8783 357,-60 366.7862,-68.2002 375.4954,-79.2061 382.3425,-89.2902"/>
+<polygon fill="#000000" stroke="#000000" points="379.4906,-91.3255 387.8606,-97.8211 385.3681,-87.5236 379.4906,-91.3255"/>
+<text text-anchor="middle" x="377.3895" y="-72" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;h6 -->
+<g id="node8" class="node state regular">
+<title>4&#39;h6</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="384,-216 328,-216 328,-180 384,-180 384,-216"/>
+<text text-anchor="start" x="344.6684" y="-194.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;h6</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M340.3333,-181C340.3333,-181 371.6667,-181 371.6667,-181 377.3333,-181 383,-186.6667 383,-192.3333 383,-192.3333 383,-203.6667 383,-203.6667 383,-209.3333 377.3333,-215 371.6667,-215 371.6667,-215 340.3333,-215 340.3333,-215 334.6667,-215 329,-209.3333 329,-203.6667 329,-203.6667 329,-192.3333 329,-192.3333 329,-186.6667 334.6667,-181 340.3333,-181"/>
+</g>
+<!-- 4&#39;h6&#45;&gt;4&#39;hA -->
+<g id="edge7" class="edge transition">
+<title>4&#39;h6&#45;&gt;4&#39;hA</title>
+<path fill="none" stroke="#000000" d="M365.3212,-179.8015C370.8131,-169.0791 377.8677,-155.306 384.0157,-143.3026"/>
+<polygon fill="#000000" stroke="#000000" points="387.2612,-144.6436 388.7049,-134.1476 381.0309,-141.4524 387.2612,-144.6436"/>
+<text text-anchor="middle" x="380.3895" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;h7 -->
+<g id="node9" class="node state regular">
+<title>4&#39;h7</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="306,-216 250,-216 250,-180 306,-180 306,-216"/>
+<text text-anchor="start" x="266.6684" y="-194.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;h7</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M262.3333,-181C262.3333,-181 293.6667,-181 293.6667,-181 299.3333,-181 305,-186.6667 305,-192.3333 305,-192.3333 305,-203.6667 305,-203.6667 305,-209.3333 299.3333,-215 293.6667,-215 293.6667,-215 262.3333,-215 262.3333,-215 256.6667,-215 251,-209.3333 251,-203.6667 251,-203.6667 251,-192.3333 251,-192.3333 251,-186.6667 256.6667,-181 262.3333,-181"/>
+</g>
+<!-- 4&#39;h7&#45;&gt;4&#39;hA -->
+<g id="edge8" class="edge transition">
+<title>4&#39;h7&#45;&gt;4&#39;hA</title>
+<path fill="none" stroke="#000000" d="M304.6319,-179.8015C321.8768,-168.0175 344.514,-152.5487 363.1796,-139.7939"/>
+<polygon fill="#000000" stroke="#000000" points="365.1608,-142.6793 371.4426,-134.1476 361.2114,-136.8998 365.1608,-142.6793"/>
+<text text-anchor="middle" x="346.3895" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;h8 -->
+<g id="node10" class="node state regular">
+<title>4&#39;h8</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="348,-134 292,-134 292,-98 348,-98 348,-134"/>
+<text text-anchor="start" x="308.6684" y="-112.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;h8</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M304.3333,-99C304.3333,-99 335.6667,-99 335.6667,-99 341.3333,-99 347,-104.6667 347,-110.3333 347,-110.3333 347,-121.6667 347,-121.6667 347,-127.3333 341.3333,-133 335.6667,-133 335.6667,-133 304.3333,-133 304.3333,-133 298.6667,-133 293,-127.3333 293,-121.6667 293,-121.6667 293,-110.3333 293,-110.3333 293,-104.6667 298.6667,-99 304.3333,-99"/>
+</g>
+<!-- 4&#39;h8&#45;&gt;4&#39;h5 -->
+<g id="edge9" class="edge transition">
+<title>4&#39;h8&#45;&gt;4&#39;h5</title>
+<path fill="none" stroke="#000000" d="M316.4491,-97.8015C314.3983,-87.2915 311.7757,-73.8503 309.4669,-62.0177"/>
+<polygon fill="#000000" stroke="#000000" points="312.8914,-61.2922 307.541,-52.1476 306.021,-62.6328 312.8914,-61.2922"/>
+<text text-anchor="middle" x="314.3895" y="-72" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;h9 -->
+<g id="node11" class="node state regular">
+<title>4&#39;h9</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="270,-134 214,-134 214,-98 270,-98 270,-134"/>
+<text text-anchor="start" x="230.6684" y="-112.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;h9</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M226.3333,-99C226.3333,-99 257.6667,-99 257.6667,-99 263.3333,-99 269,-104.6667 269,-110.3333 269,-110.3333 269,-121.6667 269,-121.6667 269,-127.3333 263.3333,-133 257.6667,-133 257.6667,-133 226.3333,-133 226.3333,-133 220.6667,-133 215,-127.3333 215,-121.6667 215,-121.6667 215,-110.3333 215,-110.3333 215,-104.6667 220.6667,-99 226.3333,-99"/>
+</g>
+<!-- 4&#39;h9&#45;&gt;4&#39;h5 -->
+<g id="edge10" class="edge transition">
+<title>4&#39;h9&#45;&gt;4&#39;h5</title>
+<path fill="none" stroke="#000000" d="M255.7598,-97.8015C264.1078,-86.7606 274.9015,-72.4851 284.1617,-60.2378"/>
+<polygon fill="#000000" stroke="#000000" points="287.0393,-62.2351 290.2787,-52.1476 281.4557,-58.0133 287.0393,-62.2351"/>
+<text text-anchor="middle" x="278.3895" y="-72" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;hA&#45;&gt;4&#39;h5 -->
+<g id="edge11" class="edge transition">
+<title>4&#39;hA&#45;&gt;4&#39;h5</title>
+<path fill="none" stroke="#000000" d="M377.1384,-97.8015C363.9949,-86.336 346.8528,-71.3822 332.4682,-58.8339"/>
+<polygon fill="#000000" stroke="#000000" points="334.6398,-56.0838 324.8033,-52.1476 330.0382,-61.3588 334.6398,-56.0838"/>
+<text text-anchor="middle" x="358.3895" y="-72" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;hB -->
+<g id="node13" class="node state regular">
+<title>4&#39;hB</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="192,-134 136,-134 136,-98 192,-98 192,-134"/>
+<text text-anchor="start" x="152.0024" y="-112.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;hB</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M148.3333,-99C148.3333,-99 179.6667,-99 179.6667,-99 185.3333,-99 191,-104.6667 191,-110.3333 191,-110.3333 191,-121.6667 191,-121.6667 191,-127.3333 185.3333,-133 179.6667,-133 179.6667,-133 148.3333,-133 148.3333,-133 142.6667,-133 137,-127.3333 137,-121.6667 137,-121.6667 137,-110.3333 137,-110.3333 137,-104.6667 142.6667,-99 148.3333,-99"/>
+</g>
+<!-- 4&#39;hB&#45;&gt;4&#39;h5 -->
+<g id="edge12" class="edge transition">
+<title>4&#39;hB&#45;&gt;4&#39;h5</title>
+<path fill="none" stroke="#000000" d="M192.3311,-99.4061C213.774,-86.8466 243.419,-69.4832 266.7759,-55.8027"/>
+<polygon fill="#000000" stroke="#000000" points="268.8511,-58.6434 275.711,-50.5692 265.3133,-52.6032 268.8511,-58.6434"/>
+<text text-anchor="middle" x="244.3895" y="-72" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;hC -->
+<g id="node14" class="node state regular">
+<title>4&#39;hC</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="228,-216 172,-216 172,-180 228,-180 228,-216"/>
+<text text-anchor="start" x="187.6724" y="-194.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;hC</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M184.3333,-181C184.3333,-181 215.6667,-181 215.6667,-181 221.3333,-181 227,-186.6667 227,-192.3333 227,-192.3333 227,-203.6667 227,-203.6667 227,-209.3333 221.3333,-215 215.6667,-215 215.6667,-215 184.3333,-215 184.3333,-215 178.6667,-215 173,-209.3333 173,-203.6667 173,-203.6667 173,-192.3333 173,-192.3333 173,-186.6667 178.6667,-181 184.3333,-181"/>
+</g>
+<!-- 4&#39;hF -->
+<g id="node17" class="node state regular">
+<title>4&#39;hF</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="94,-134 38,-134 38,-98 94,-98 94,-134"/>
+<text text-anchor="start" x="54.3384" y="-112.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;hF</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M50.3333,-99C50.3333,-99 81.6667,-99 81.6667,-99 87.3333,-99 93,-104.6667 93,-110.3333 93,-110.3333 93,-121.6667 93,-121.6667 93,-127.3333 87.3333,-133 81.6667,-133 81.6667,-133 50.3333,-133 50.3333,-133 44.6667,-133 39,-127.3333 39,-121.6667 39,-121.6667 39,-110.3333 39,-110.3333 39,-104.6667 44.6667,-99 50.3333,-99"/>
+</g>
+<!-- 4&#39;hC&#45;&gt;4&#39;hF -->
+<g id="edge13" class="edge transition">
+<title>4&#39;hC&#45;&gt;4&#39;hF</title>
+<path fill="none" stroke="#000000" d="M171.9092,-180.8101C151.8088,-168.5099 124.5584,-151.8342 102.7331,-138.4785"/>
+<polygon fill="#000000" stroke="#000000" points="104.4104,-135.4016 94.0538,-133.1673 100.7566,-141.3723 104.4104,-135.4016"/>
+<text text-anchor="middle" x="142.3895" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;hD -->
+<g id="node15" class="node state regular">
+<title>4&#39;hD</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="150,-216 94,-216 94,-180 150,-180 150,-216"/>
+<text text-anchor="start" x="109.6724" y="-194.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;hD</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M106.3333,-181C106.3333,-181 137.6667,-181 137.6667,-181 143.3333,-181 149,-186.6667 149,-192.3333 149,-192.3333 149,-203.6667 149,-203.6667 149,-209.3333 143.3333,-215 137.6667,-215 137.6667,-215 106.3333,-215 106.3333,-215 100.6667,-215 95,-209.3333 95,-203.6667 95,-203.6667 95,-192.3333 95,-192.3333 95,-186.6667 100.6667,-181 106.3333,-181"/>
+</g>
+<!-- 4&#39;hD&#45;&gt;4&#39;hF -->
+<g id="edge14" class="edge transition">
+<title>4&#39;hD&#45;&gt;4&#39;hF</title>
+<path fill="none" stroke="#000000" d="M109.5718,-179.8015C102.1042,-168.8668 92.4698,-154.7593 84.1601,-142.5916"/>
+<polygon fill="#000000" stroke="#000000" points="86.9234,-140.4317 78.3935,-134.1476 81.1428,-144.3795 86.9234,-140.4317"/>
+<text text-anchor="middle" x="98.3895" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;hE -->
+<g id="node16" class="node state regular">
+<title>4&#39;hE</title>
+<polygon fill="#ffffff" fill-opacity="0.003922" stroke="transparent" stroke-width="2" points="72,-216 16,-216 16,-180 72,-180 72,-216"/>
+<text text-anchor="start" x="32.0024" y="-194.2" font-family="Helvetica,sans-Serif" font-size="12.00" fill="#000000">4&#39;hE</text>
+<path fill="none" stroke="#000000" stroke-width="2" d="M28.3333,-181C28.3333,-181 59.6667,-181 59.6667,-181 65.3333,-181 71,-186.6667 71,-192.3333 71,-192.3333 71,-203.6667 71,-203.6667 71,-209.3333 65.3333,-215 59.6667,-215 59.6667,-215 28.3333,-215 28.3333,-215 22.6667,-215 17,-209.3333 17,-203.6667 17,-203.6667 17,-192.3333 17,-192.3333 17,-186.6667 22.6667,-181 28.3333,-181"/>
+</g>
+<!-- 4&#39;hE&#45;&gt;4&#39;hF -->
+<g id="edge15" class="edge transition">
+<title>4&#39;hE&#45;&gt;4&#39;hF</title>
+<path fill="none" stroke="#000000" d="M48.8825,-179.8015C51.7023,-169.2915 55.3085,-155.8503 58.4831,-144.0177"/>
+<polygon fill="#000000" stroke="#000000" points="61.9202,-144.713 61.1311,-134.1476 55.1593,-142.899 61.9202,-144.713"/>
+<text text-anchor="middle" x="57.3895" y="-154" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+<!-- 4&#39;hF&#45;&gt;4&#39;hF -->
+<g id="edge16" class="edge transition">
+<title>4&#39;hF&#45;&gt;4&#39;hF</title>
+<path fill="none" stroke="#000000" d="M94.0183,-120.8247C105.888,-121.1883 116,-119.5801 116,-116 116,-113.5387 111.2205,-112.0094 104.3762,-111.4121"/>
+<polygon fill="#000000" stroke="#000000" points="104.0957,-107.9049 94.0183,-111.1753 103.9356,-114.903 104.0957,-107.9049"/>
+<text text-anchor="middle" x="117.3895" y="-113" font-family="Helvetica,sans-Serif" font-size="10.00" fill="#000000"> </text>
+</g>
+</g>
+</svg>
+</div></div>
+        <br><br><br><br><br><br>
+    </article class="markdown-body">
+    </body>
+    
