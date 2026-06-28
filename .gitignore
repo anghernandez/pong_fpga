@@ -38,6 +38,7 @@ logs/
 *.str
 *.bit
 *.xsa
+!Hardware/xsaCHECK3.xsa
 *.mif
 hs_err_pid*.log
 
