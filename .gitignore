@@ -30,6 +30,16 @@ logs/
 .ip_user_files/
 .runs/
 .sim/
+*.cache/
+*.runs/
+*.gen/
+*.Xil/
+*.jou
+*.str
+*.bit
+*.xsa
+*.mif
+hs_err_pid*.log
 
 # Configuración temporal
 *.lock
