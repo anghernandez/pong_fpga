@@ -46,8 +46,8 @@ main.c
 ├── sd_image.c     → carga de imágenes desde microSD al inicio
 ├── input.c        → lectura de switches y botones
 ├── ui_text.c      → menús y pantallas de texto
-├── pong_game.c    → lógica del juego single-player (IA)
-├── pong_paddles.c → física de paletas y pelota
+├── pong_local.c    → lógica del juego multijugador local 
+├── pong_mp.c → lógica del juego multijudador remoto
 ├── pong_mp.c      → modo multijugador vía SPI
 └── spi.c          → driver SPI bit-bang sobre GPIO PMOD JA
 ```
