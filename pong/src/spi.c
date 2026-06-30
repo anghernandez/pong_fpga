@@ -2,16 +2,26 @@
 
 static void spi_delay(volatile int n) { while (n--); }
 
+
+//Configura la FPGA como maestro. Deja SCK, MOSI y SS como salidas, y MISO como entrada.
 void spi_init_master(void) {
     Xil_Out32(SPI_TRI, TRI_MASTER);
     Xil_Out32(SPI_DATA, PIN_SS);   /* SS inactivo (alto) al arrancar */
 }
-
+//Configura la FPGA como esclavo. Deja SCK, MOSI y SS como entradas, y MISO como salida.
 void spi_init_slave(void) {
     Xil_Out32(SPI_TRI, TRI_SLAVE);
     Xil_Out32(SPI_DATA, 0u);
 }
 
+//El maestro envía un byte bit por bit, desde el bit más significativo. Para cada bit
+
+/*
+coloca dato en MOSI
+sube SCK
+lee MISO
+baja SCK
+*/
 unsigned char spi_master_transfer(unsigned char tx) {
     unsigned char rx = 0;
     unsigned int mosi_bit;
@@ -31,6 +41,13 @@ unsigned char spi_master_transfer(unsigned char tx) {
     return rx;
 }
 
+//El esclavo espera los pulsos de reloj del maestro. En cada pulso:
+/*
+coloca su dato en MISO
+espera SCK alto
+lee MOSI
+espera SCK bajo
+*/
 int spi_slave_transfer(unsigned char tx, unsigned char *rx_out) {
     unsigned char rx = 0;
     int bit, t;

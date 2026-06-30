@@ -142,7 +142,7 @@ static int step_ball(int *bx, int *by, int *vx, int *vy,
 }
 
 /* ─── Punto de entrada ───────────────────────────────────────────────────────── */
-void pong_paddles_run(void) {
+void pong_local_run(void) {
     while (Xil_In32(GPIO_BUTTONS_BASE + GPIO_DATA_REG) & BTN_C);
 
     /*

@@ -5,7 +5,7 @@
 #include "ui_text.h"
 #include <string.h>
 
-void pong_paddles_run(void);
+void pong_local_run(void);
 int  pong_mp_handshake(int is_master);
 void pong_mp_master_run(void);
 void pong_mp_slave_run(void);
@@ -69,7 +69,7 @@ static void draw_state_menu(void) {
     else
         clear_screen(COLOR_MAGENTA_LIGHT);
     ui_draw_text_centered(390, "\xBF EN QUE MODO QUIERES JUGAR?", COLOR_RED_LIGHT);
-    ui_draw_text_centered(440, "SW0(DOS JUGADORES)     SW1(MULTIJUGADOR)", COLOR_CYAN_LIGHT);
+    ui_draw_text_centered(440, "SW0(MULTIJUADOR LOCAL)     SW1(MULTIJUGADOR REMOTO)", COLOR_CYAN_LIGHT);
 }
 
 static void draw_state_mp_role_select(void) {
@@ -79,8 +79,8 @@ static void draw_state_mp_role_select(void) {
         clear_screen(COLOR_BLACK);
     ui_draw_text_centered(200, "MODO MULTIJUGADOR", COLOR_CYAN_LIGHT);
     ui_draw_text_centered(240, "SW15 ON : MAESTRO     SW15 OFF : ESCLAVO", COLOR_WHITE);
-    ui_draw_text_centered(300, "ESCLAVO: presiona BTNC primero", COLOR_YELLOW);
-    ui_draw_text_centered(340, "MAESTRO: espera y luego presiona BTNC", COLOR_RED_LIGHT);
+    ui_draw_text_centered(300, "ESCLAVO: presiona BTNC para iniciar", COLOR_YELLOW);
+    ui_draw_text_centered(340, "MAESTRO: presiona BTNC para iniciar", COLOR_RED_LIGHT);
 }
 
 int main(void) {
@@ -100,7 +100,7 @@ int main(void) {
 
             /* Estados bloqueantes: llaman a una funcion y vuelven al menu */
             if (state == STATE_GAME) {
-                pong_paddles_run();
+                pong_local_run();
                 state      = STATE_MENU;
                 prev_state = (GameState)(-1);
                 continue;
