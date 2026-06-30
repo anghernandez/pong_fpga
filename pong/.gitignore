@@ -1,29 +1,12 @@
-# Ignore build output directory
-/build
-/export
-
-# Ignore object files and dependent files
-.o
-.d
-
-#Ignore logs folder and log files
-/logs
-.log
-
-#Ignore lock files
-.lock
-
-.bin
-.pdi
-.peers.ini
-.repo.yaml
-.vitisWorksp
-
 # Build
+/build/
+/export/
 build/
 
 # Vitis
 _ide/_build/
+.vitis/
+.vitisWorksp
 
 # CMake
 CMakeCache.txt
@@ -31,9 +14,26 @@ CMakeFiles/
 cmake_install.cmake
 Makefile
 
-# Archivos generados
+# Objetos y dependencias
+*.o
+*.d
+
+# Binarios generados
 *.elf
 *.size
+*.bin
+*.pdi
+
+# Logs
+logs/
+*.log
+
+# Lock files
+*.lock
+
+# Configuración temporal
+.peers.ini
+.repo.yaml
 
 # VS Code
 .vscode/
