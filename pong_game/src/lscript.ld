@@ -2,36 +2,16 @@
 * Copyright (C) 2023 Advanced Micro Devices, Inc. All Rights Reserved.
 * SPDX-License-Identifier: MIT
 ******************************************************************************/
-/* Se realizan los cambios necesarios para memoria
 
-.text   → firmware/código
-.rodata → constantes
-.data   → variables inicializadas
-.bss    → variables no inicializadas
-.heap   → memoria dinámica
-.stack  → pila del programa
-
-*/
-
-_STACK_SIZE = DEFINED(_STACK_SIZE) ? _STACK_SIZE : 0x400;
-_HEAP_SIZE = DEFINED(_HEAP_SIZE) ? _HEAP_SIZE : 0x800;
+_STACK_SIZE = DEFINED(_STACK_SIZE) ? _STACK_SIZE : 0x2000;
+_HEAP_SIZE = DEFINED(_HEAP_SIZE) ? _HEAP_SIZE : 0x4000;
 
 /* Define Memories in the system */
-
-/* SE REALIZA CAMBIO PARA DEJAR LIBRE A 0x81000000 para vga_cache
 
 MEMORY
 {
 	lmb_bram_0 : ORIGIN = 0x0, LENGTH = 0x4000
 	mig_0 : ORIGIN = 0x80000000, LENGTH = 0x8000000
-}*/ 
-
-
-
-MEMORY
-{
-    lmb_bram_0 : ORIGIN = 0x0, LENGTH = 0x4000
-    mig_0 : ORIGIN = 0x80000000, LENGTH = 0x01000000
 }
 
 /* Specify the default entry point to the program */
@@ -49,21 +29,25 @@ SECTIONS
    __images_end = .;
 } > mig_0
 
+/* Boot stub y crt0 deben estar en BRAM (reset vector = 0x0) */
 .text.init : {
    __text.init_start = .;
    *(.text.init)
+   *crt0.o(.text)
    __text.init_end = .;
 } > lmb_bram_0
+
+/* Codigo principal en DDR2 */
 .text : {
-   . = ALIGN(2048);
+   . = ALIGN(4);
    *(.text)
    *(.text.*)
    *(.gnu.linkonce.t.*)
-}   > lmb_bram_0
+} > mig_0
 
 .note.gnu.build-id : {
    KEEP (*(.note.gnu.build-id))
-} >  mig_0
+} > mig_0
 
 .init : {
    KEEP (*(.init))
@@ -127,15 +111,15 @@ SECTIONS
 
 .got : {
    *(.got)
-} > mig_0
+} > lmb_bram_0
 
 .got1 : {
    *(.got1)
-} > mig_0
+} > lmb_bram_0
 
 .got2 : {
    *(.got2)
-} > mig_0
+} > lmb_bram_0
 
 .jcr : {
    *(.jcr)
@@ -212,7 +196,7 @@ _SDA_BASE_ = __sdata_start + ((__sbss_end - __sdata_start) / 2 );
 
 _SDA2_BASE_ = __sdata2_start + ((__sbss2_end - __sdata2_start) / 2 );
 
-/* Generate Stack and Heap definitions */
+/* Stack y Heap en DDR2 */
 
 .heap (NOLOAD) : {
    . = ALIGN(8);

@@ -8,17 +8,8 @@
  */
 static uint32_t *vga_cache = (uint32_t *)0x81000000; // antes 0x80000000
 
-//Primer cambio VGA para poder pintar bien a ball
-/*void write_word(int word_addr, unsigned int value) {
-    if (word_addr < TOTAL_WORDS) {
-        vga_cache[word_addr] = (uint32_t)value;
-        Xil_Out32(VGA_BASE + (word_addr << 2), (uint32_t)value);
-    }
-}*/
-
-
 void write_word(int word_addr, unsigned int value) {
-    if (word_addr >= 0 && word_addr < TOTAL_WORDS) {
+    if (word_addr < TOTAL_WORDS) {
         vga_cache[word_addr] = (uint32_t)value;
         Xil_Out32(VGA_BASE + (word_addr << 2), (uint32_t)value);
     }
@@ -41,9 +32,9 @@ void draw_pixel(int x, int y, unsigned char color) {
     int nibble_pos = 7 - (x % 8);
     int shift      = nibble_pos * 4;
 
-    // Escribe directamente sin leer primero
-    unsigned int value = (color & 0xF) << shift;
-    write_word(word_addr, value);
+    unsigned int old  = read_word(word_addr);
+    unsigned int mask = ~(0xFu << shift);
+    write_word(word_addr, (old & mask) | ((unsigned int)(color & 0xF) << shift));
 }
 
 unsigned int color_to_word(unsigned char color) {

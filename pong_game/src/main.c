@@ -1,179 +1,163 @@
-#include "game.h"
 #include "vga.h"
-#include "xil_io.h"
+#include "font.h"
+#include "sd_image.h"
+#include "input.h"
+#include "ui_text.h"
+#include <string.h>
 
-#define BTN_DATA 0x40010000
-#define BTN_TRI  0x40010004
+void pong_local_run(void);
+int  pong_mp_handshake(int is_master);
+void pong_mp_master_run(void);
+void pong_mp_slave_run(void);
 
+/* ============================================================================
+ * MAQUINA DE ESTADOS
+ *
+ *   MENU              --SW0--> GAME          (dos jugadores, una board)
+ *   MENU              --SW1--> MP_ROLE_SELECT
+ *   MP_ROLE_SELECT           : SW15=ON=Maestro / SW15=OFF=Esclavo
+ *                      --BTNC--> MP_HANDSHAKE (rol se bloquea aqui)
+ *   MP_HANDSHAKE             : SPI handshake bloqueante
+ *                      --OK---> MP_GAME
+ *                      --FAIL-> MENU
+ *   MP_GAME                  : juego SPI segun rol
+ *                      --fin--> MENU
+ *   GAME                     : pong local dos jugadores
+ *                      --fin--> MENU
+ * ============================================================================ */
 
-#define BTN_C   (1u << 0)
-#define BTN_U   (1u << 1)
-#define BTN_L   (1u << 2)
-#define BTN_R   (1u << 3)
-#define BTN_D   (1u << 4)
+typedef enum {
+    STATE_MENU,
+    STATE_MP_ROLE_SELECT,
+    STATE_MP_HANDSHAKE,
+    STATE_MP_GAME,
+    STATE_GAME
+} GameState;
 
+#define SW0_BIT   0
+#define SW1_BIT   1
+#define SW15_BIT  15
+#define BTNC_BIT  0
 
-#define FRAME_TICK_LIMIT 20000
-
-/*static void erase_game(Game *game)
-{
-    draw_rect(game->player.x, game->player.y,
-              game->player.width, game->player.height,
-              COLOR_BLACK);
-
-    draw_rect(game->cpu.x, game->cpu.y,
-              game->cpu.width, game->cpu.height,
-              COLOR_BLACK);
-
-    draw_rect(game->ball.x, game->ball.y,
-              game->ball.size, game->ball.size,
-              COLOR_BLACK);
-}*/
-
-//funcion para borrar ball
-
-/*static void erase_ball_area(int x, int y, int w, int h)
-{
-    for (int row = 0; row < h; row++) {
-        draw_hline(x, y + row, w, COLOR_BLACK);
-    }
-}*/
-
-
-
-/*static void erase_ball_trail(Game *game)
-{
-    int x0 = game->ball.prev_x;
-    int y0 = game->ball.prev_y;
-    int x1 = game->ball.x;
-    int y1 = game->ball.y;
-    int s  = game->ball.size;
-
-    if (x1 > x0) {
-        draw_rect(x0, y0, x1 - x0, s, COLOR_BLACK);
-    } else if (x1 < x0) {
-        draw_rect(x1 + s, y0, x0 - x1, s, COLOR_BLACK);
-    }
-
-    if (y1 > y0) {
-        draw_hline(x0, y0, s, COLOR_BLACK);
-        draw_hline(x0, y0 + 1, s, COLOR_BLACK);
-    } else if (y1 < y0) {
-        draw_hline(x0, y0 + s - 1, s, COLOR_BLACK);
-        draw_hline(x0, y0 + s - 2, s, COLOR_BLACK);
-    }
-}
-*/
-
-
-
-static int min_int(int a, int b)
-{
-    return (a < b) ? a : b;
+static int bit_is_set(unsigned int reg, int bit) {
+    return (reg >> bit) & 0x1;
 }
 
-static int max_int(int a, int b)
-{
-    return (a > b) ? a : b;
-}
+#define IMG_BYTES        (480 * 480 / 2)
+#define MENU_CACHE_ADDR  0x81100000
+#define TWO_CACHE_ADDR   0x81200000
 
-static void erase_ball_union(Game *game)
-{
-    int margin = 2;
+static unsigned char * const menu_cache = (unsigned char *)MENU_CACHE_ADDR;
+static unsigned char * const two_cache  = (unsigned char *)TWO_CACHE_ADDR;
+static int menu_ok = 0;
+static int two_ok  = 0;
 
-    int x0 = game->ball.prev_x - margin;
-    int y0 = game->ball.prev_y - margin;
-    int x1 = game->ball.x - margin;
-    int y1 = game->ball.y - margin;
-
-    int left   = min_int(x0, x1);
-    int top    = min_int(y0, y1);
-    int right  = max_int(x0, x1) + game->ball.size + margin * 2;
-    int bottom = max_int(y0, y1) + game->ball.size + margin * 2;
-
-    for (int y = top; y < bottom; y++) {
-        draw_hline(left, y, right - left, COLOR_BLACK);
+static void preload_images(void) {
+    if (sd_image_load("MENU.BIN") == 0) {
+        memcpy(menu_cache, sd_image_get_buffer(), IMG_BYTES);
+        menu_ok = 1;
+    }
+    if (sd_image_load("FIELD.BIN") == 0) {
+        memcpy(two_cache, sd_image_get_buffer(), IMG_BYTES);
+        two_ok = 1;
     }
 }
 
-static void erase_game(Game *game)
-{
-    // Player paddle: borrar solo la parte que dejó atrás
-    if (game->player.y > game->player.prev_y) {
-        draw_rect(game->player.x, game->player.prev_y,
-                  game->player.width, game->player.y - game->player.prev_y,
-                  COLOR_BLACK);
-    } else if (game->player.y < game->player.prev_y) {
-        draw_rect(game->player.x, game->player.y + game->player.height,
-                  game->player.width, game->player.prev_y - game->player.y,
-                  COLOR_BLACK);
-    }
-
-    // CPU paddle
-    if (game->cpu.y > game->cpu.prev_y) {
-        draw_rect(game->cpu.x, game->cpu.prev_y,
-                  game->cpu.width, game->cpu.y - game->cpu.prev_y,
-                  COLOR_BLACK);
-    } else if (game->cpu.y < game->cpu.prev_y) {
-        draw_rect(game->cpu.x, game->cpu.y + game->cpu.height,
-                  game->cpu.width, game->cpu.prev_y - game->cpu.y,
-                  COLOR_BLACK);
-    }
-
-
-
-
+static void draw_state_menu(void) {
+    if (menu_ok)
+        draw_image_centered(menu_cache);
+    else
+        clear_screen(COLOR_MAGENTA_LIGHT);
+    ui_draw_text_centered(390, "\xBF EN QUE MODO QUIERES JUGAR?", COLOR_RED_LIGHT);
+    ui_draw_text_centered(440, "SW0(MULTIJUADOR LOCAL)     SW1(MULTIJUGADOR REMOTO)", COLOR_CYAN_LIGHT);
 }
 
-
-
-
-static void draw_game(Game *game)
-{
-    draw_rect(game->player.x, game->player.y,
-              game->player.width, game->player.height,
-              COLOR_WHITE);
-
-    draw_rect(game->cpu.x, game->cpu.y,
-              game->cpu.width, game->cpu.height,
-              COLOR_WHITE);
-
-    draw_rect(game->ball.x, game->ball.y,
-              game->ball.size, game->ball.size,
-              COLOR_RED_LIGHT);
+static void draw_state_mp_role_select(void) {
+    if (two_ok)
+        draw_image_centered(two_cache);
+    else
+        clear_screen(COLOR_BLACK);
+    ui_draw_text_centered(200, "MODO MULTIJUGADOR", COLOR_CYAN_LIGHT);
+    ui_draw_text_centered(240, "SW15 ON : MAESTRO     SW15 OFF : ESCLAVO", COLOR_WHITE);
+    ui_draw_text_centered(300, "ESCLAVO: presiona BTNC para iniciar", COLOR_YELLOW);
+    ui_draw_text_centered(340, "MAESTRO: presiona BTNC para iniciar", COLOR_RED_LIGHT);
 }
 
-int main(void)
-{
-    Game game;
-    unsigned int frame_counter = 0;
+int main(void) {
+    input_init();
+    sd_image_init();
 
-    game_init(&game);
-    Xil_Out32(BTN_TRI, 0xFFFFFFFF);
-    clear_screen(COLOR_BLACK);
-   // draw_border(COLOR_WHITE);
-    draw_game(&game);
+    preload_images();
+
+    GameState state      = STATE_MENU;
+    GameState prev_state = (GameState)(-1);
+    int       is_master  = 0;
+
+    int sw0_prev = 0, sw1_prev = 0, btnc_prev = 0;
 
     while (1) {
-        frame_counter++;
+        if (state != prev_state) {
 
-        if (frame_counter >= FRAME_TICK_LIMIT) {
-            frame_counter = 0;
+            /* Estados bloqueantes: llaman a una funcion y vuelven al menu */
+            if (state == STATE_GAME) {
+                pong_local_run();
+                state      = STATE_MENU;
+                prev_state = (GameState)(-1);
+                continue;
+            }
+            if (state == STATE_MP_HANDSHAKE) {
+                int ok = pong_mp_handshake(is_master);
+                state      = ok ? STATE_MP_GAME : STATE_MENU;
+                prev_state = (GameState)(-1);
+                continue;
+            }
+            if (state == STATE_MP_GAME) {
+                if (is_master) pong_mp_master_run();
+                else           pong_mp_slave_run();
+                state      = STATE_MENU;
+                prev_state = (GameState)(-1);
+                continue;
+            }
 
-           
+            /* Estados de pantalla: solo dibujan y esperan input */
+            switch (state) {
+                case STATE_MENU:            draw_state_menu();            break;
+                case STATE_MP_ROLE_SELECT:  draw_state_mp_role_select();  break;
+                default: break;
+            }
+            prev_state = state;
+        }
 
-            unsigned int btn = Xil_In32(BTN_DATA);
+        unsigned int sw  = input_read_switches();
+        unsigned int btn = input_read_buttons();
 
-            int player_up   = (btn & BTN_U) ? 1 : 0;
-            int player_down = (btn & BTN_D) ? 1 : 0;
+        int sw0_now  = bit_is_set(sw,  SW0_BIT);
+        int sw1_now  = bit_is_set(sw,  SW1_BIT);
+        int btnc_now = bit_is_set(btn, BTNC_BIT);
 
-            game_update(&game, player_up, player_down);
+        int sw0_edge  = sw0_now  && !sw0_prev;
+        int sw1_edge  = sw1_now  && !sw1_prev;
+        int btnc_edge = btnc_now && !btnc_prev;
 
-            erase_game(&game);
+        sw0_prev  = sw0_now;
+        sw1_prev  = sw1_now;
+        btnc_prev = btnc_now;
 
-            //erase_ball_trail(&game);
-            erase_ball_union(&game);
-            draw_game(&game);
+        switch (state) {
+            case STATE_MENU:
+                if      (sw0_edge) state = STATE_GAME;
+                else if (sw1_edge) state = STATE_MP_ROLE_SELECT;
+                break;
+            case STATE_MP_ROLE_SELECT:
+                if (btnc_edge) {
+                    /* Leer SW15 directo del GPIO — input_read_switches devuelve
+                     * flancos ascendentes, no niveles; SW15 estable daria 0 */
+                    unsigned int sw_raw = Xil_In32(GPIO_SWITCHES_BASE + GPIO_DATA_REG);
+                    is_master = (sw_raw >> SW15_BIT) & 1;
+                    state     = STATE_MP_HANDSHAKE;
+                }
+                break;
+            default: break;
         }
     }
 
