@@ -17,4 +17,27 @@
 .pdi
 .peers.ini
 .repo.yaml
-.vitisWorkspace.json
+.vitisWorksp
+
+# Build
+build/
+
+# Vitis
+_ide/_build/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Archivos generados
+*.elf
+*.size
+
+# VS Code
+.vscode/
+
+# Archivos temporales
+*.swp
+*~
