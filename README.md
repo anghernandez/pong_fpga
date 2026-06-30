@@ -208,3 +208,30 @@ Durante el juego multijugador cada jugador controla su paleta con **BTNU** (arri
 **EL3313 Taller de Diseño Digital** · I Semestre 2026  
 Profesor: Luis G. León-Vega, Ph.D  
 Instituto Tecnológico de Costa Rica
+
+
+---
+
+## Video de exposición
+
+https://youtu.be/mONFn-cRt2o
+
+--- 
+
+## Uso de IA CHATS
+
+
+Se permitió el uso de herramientas de IA como apoyo para comprensión, generación de ideas y mejora de redacción. La implementación, validación y resultados son responsabilidad del estudiante.
+
+En caso de uso, se adjuntan las conversaciones como evidencia. El funcionamiento del sistema puede demostrarse mediante pruebas, garantizando la comprensión de los conceptos y la correcta operación de la solución.
+
+
+
+https://claude.ai/share/47a18f3e-206b-4914-80dc-3497f4c43172
+https://claude.ai/share/979474ea-2fcb-4cd4-9cf8-ce7f98b9a18b
+https://claude.ai/share/11125d84-e35a-4d4f-898d-753fbe913bbb
+https://claude.ai/share/07b96225-a7ce-48d3-b2bb-f3e8e11b6109
+https://claude.ai/share/f6872f14-054a-406c-a57f-67909a4b624f
+https://claude.ai/share/51b78f57-b6e2-4805-b641-179f4138e1f5
+https://claude.ai/share/2724954d-40fd-48d1-8792-1a4e72a1d6ba
+https://claude.ai/share/ad5a239d-40d1-47b3-b579-d5d5dd8e109c
