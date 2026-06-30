@@ -1,4 +1,4 @@
-# pong_fpga
+# PONG MULTIJUGADOR EN FPGA
 
 Sistema embebido multijugador sobre FPGA — EL3313 Taller de Diseño Digital, I Semestre 2026.
 
